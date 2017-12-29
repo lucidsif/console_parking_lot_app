@@ -20,6 +20,7 @@ def display_options_and_parse_user_input(lot):
         print('[registration_numbers_for_cars_with_color] <string color')
         print('[slot_numbers_for_cars_with_color] <string color')
         print('[slot_number_for_registration_number] <string registration>')
+        print('[status]')
         print('[q] <string quit>')
     else:
         print('[create_parking_lot] <int slots>')
@@ -60,6 +61,10 @@ def initialize_console_app():
             elif choice[0] == 'slot_number_for_registration_number':
                 registration = choice[1]
                 print(lot.slot_number_for_registration_number(registration))
+            elif(choice[0] == 'status'):
+                statusList = lot.status()
+                for vehicle in statusList:
+                    print('%s %s %s' %(vehicle['slot'], vehicle['registration'], vehicle['color']))
             elif choice[0] == 'q':
                 print("\nThanks for using the parking lot program!")
             else:
@@ -75,7 +80,6 @@ def initialize_console_app():
                 print(choice)
                 print("\nI didn't understand that input.\n")
         display_title_bar()
-
 
 initialize_console_app()
 
