@@ -24,8 +24,18 @@ def test_parking_lot_slots():
 def test_park():
     lot = create_parking_lot(5)
     ticket = lot.park('KA-01-HH-1234', 'White')
-    # the ticket should be equal to the index the vehicle is parked in
+    vehicle = lot.slots[ticket]
+    # the ticket or output of park should be equal to the index the vehicle is parked in
     assert ticket == 0
+    # The vehicle at the slot on the ticket should have the same plate and color as the one that was parked
+    assert vehicle['plate'] is 'KA-01-HH-1234'
+    assert vehicle['color'] is 'White'
+    # If parking is attempted when there are no available slots, an apology message should be returned
+    lot.park('JKL', 'Purple')
+    lot.park('MNO', 'Gray')
+    lot.park('PQR', 'Violet')
+    lot.park('STU', 'Rainbow')
+    assert lot.park('thisShouldNotBeParked', 'fail') == 'Sorry, parking lot is full'
 
 def test_find_closest_spot():
     lot = create_parking_lot(5)
@@ -40,9 +50,19 @@ def test_find_closest_spot():
     # When the first car leaves, the next available slot should have index of 0
     lot.leave(firstTicket)
     assert lot.find_closest_spot() == 0
+    # When there are no more available slots, it should return no available spots
+    lot.park('JKL', 'Purple')
+    lot.park('MNO', 'Gray')
+    lot.park('PQR', 'Violet')
+    assert lot.find_closest_spot() == 'No available spots'
 
 def test_leave():
-    pass
+    lot = create_parking_lot(5)
+    firstTicket = lot.park('ABC', 'Blue')
+    lot.leave(firstTicket)
+    # There should be no car at a slot once it leaves
+    assert lot.slots[firstTicket] is False
+
 
 
 

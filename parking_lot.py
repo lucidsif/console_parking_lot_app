@@ -4,15 +4,18 @@ class create_parking_lot(object):
         for num in range(numOfSlots):
             self.slots.append(False)
     def park(self, plate, color):
-        closestSlotIdx = self.find_closest_spot()        
-        self.slots[closestSlotIdx] = {'plate': plate, 'color': color}
-        return closestSlotIdx
+        try:
+            closestSlotIdx = self.find_closest_spot()
+            self.slots[closestSlotIdx] = {'plate': plate, 'color': color}
+            return closestSlotIdx
+        except TypeError:
+            return 'Sorry, parking lot is full'
 
     def find_closest_spot(self):
         try:
             return self.slots.index(False)
-        except RuntimeError:
-            return 'Sorry, parking lot is full'
+        except ValueError:
+            return 'No available spots'
 
     def leave(self, ticketNumber):
         self.slots[ticketNumber] = False
