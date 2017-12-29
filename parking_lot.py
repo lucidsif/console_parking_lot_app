@@ -1,48 +1,43 @@
-class create_parking_lot(object):
-    def __init__(self, numOfSlots):
-        self.slots = []
-        for num in range(numOfSlots):
-            self.slots.append(False)
-        print('Created a parking lot with %s slots' %(numOfSlots))
-    def park(self, registration, color):
-        try:
-            closestSlotIdx = self.find_closest_spot()
-            self.slots[closestSlotIdx] = {'registration': registration, 'color': color}
-            print('Allocated slot number:%s' %(closestSlotIdx))
-            return closestSlotIdx
-        except TypeError:
-            return 'Sorry, parking lot is full'
+import os
+from create_parking_lot import create_parking_lot
 
-    def find_closest_spot(self):
-        try:
-            return self.slots.index(False)
-        except ValueError:
-            return 'No available spots'
+### FUNCTIONS ###
 
-    def leave(self, ticketNumber):
-        self.slots[ticketNumber] = False
-        return 'Slot number %s is free' %(ticketNumber)
+def display_title_bar():
+    # Clears the terminal screen, and displays a title bar.
+    os.system('clear')      
+    print("\t**********************************************")
+    print("\t***  Welcome to Sif's parking lot program. How can we help you?  ***")
+    print("\t**********************************************")
+    
+def parse_user_input():
+    # Let users know what they can do.
+    print('[create_parking_lot] <int slots>')
+    print('[park] <string registration> <string color>')
+    print('[q] <string quit>')
+    # Split string into a list delimited by white spaces
+    return input("What would you like to do? ").split()
+    
+### MAIN PROGRAM ###
 
-    def registration_numbers_for_cars_with_color(self, color):
-        return [slot.get('registration') for slot in self.slots if isinstance(slot, dict) and slot.get('color') == color]
+# Set up a loop where users can choose what they'd like to do.
+choice = ['']
+display_title_bar()
+while choice[0] != 'q':    
+    
+    choice = parse_user_input()
+    
+    # Respond to the user's input.
+    display_title_bar()
+    if choice[0] == 'create_parking_lot':
+        print("\nParking lot created\n")
+    elif choice[0] == 'park':
+        print("\nCar parked!\n")
+    elif choice[0] == 'q':
+        print("\nThanks for using the parking lot program!")
+    else:
+        print(choice)
+        print("\nI didn't understand that input.\n")
 
-    def slot_numbers_for_cars_with_color(self, color):
-        slots = []
-        currentIdx = 0
-        while (currentIdx < len(self.slots)):
-            currentSlot = self.slots[currentIdx]
-            if (isinstance(currentSlot, dict) and currentSlot.get('color') is color):
-                slots.append(currentIdx)
-            currentIdx += 1
-        return slots
 
-    def slot_number_for_registration_number(self, registration):
-        currentIdx = 0
-        while (currentIdx < len(self.slots)):
-            currentSlot = self.slots[currentIdx]
-            if (isinstance(currentSlot, dict) and currentSlot.get('registration') is registration):
-                return currentIdx
-            else:
-                currentIdx += 1
-        return 'Not found'
-
+    
