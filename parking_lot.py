@@ -1,17 +1,20 @@
 import os
+import sys
 from create_parking_lot import create_parking_lot
 
 # This is a console app that allows management of parking.
 
-### FUNCTIONS ###
+### FUNCTIONS ### 
 
 def display_title_bar():    
     print("\t**********************************************")
     print("\t***  Welcome to Sif's parking lot program. How can we help you?  ***")
     print("\t**********************************************")
-    
-# TODO: Refactor function into 2 functions and DRY
-def display_options_and_parse_user_input(lot):
+
+def processFileInput():
+    pass
+
+def display_options(lot):
     # Let users know what they can do based on whether they have created a lot or not.  
     if isinstance(lot, create_parking_lot) :
         print('\n')
@@ -26,6 +29,8 @@ def display_options_and_parse_user_input(lot):
     else:
         print('[create_parking_lot] <int slots>')
         print('[q] <string quit>')
+
+def parse_user_input():
     # Split string into a list delimited by white spaces
     return input("What would you like to do? ").split()
 
@@ -37,9 +42,21 @@ def initialize_console_app():
     choice = ['']
     # Initialize lot state
     lot = None
+
+    # If a filename as been sent as input for the program at launch, process that file
+    if len(sys.argv) == 2:
+        fileInput = sys.argv[1]
+        lineInputs = []
+        with open(fileInput,'r') as i:
+            lineInputs = i.readlines()
+        print(lineInputs[0])
+        # Clean each command and pass to the program
+        
+
     # Set up a loop where users can choose what they'd like to do.    
-    while choice[0] != 'q':   
-        choice = display_options_and_parse_user_input(lot)
+    while choice[0] != 'q':
+        display_options(lot)   
+        choice = parse_user_input()
         # Respond to the user's input based on whether they created a lot or not.
         if isinstance(lot, create_parking_lot):
             if choice[0] == 'park':
