@@ -74,13 +74,11 @@ def test_registration_numbers_for_cars_with_color():
     lot.park('GREN', 'Neon')
     lot.leave(ticketX)
     lot.park('SHAR', 'Gray')
-
     # It should return a list of the registration numbers of all cars with the specified color
     expectedRegistrationListOfPurpleCars = ['JKL', 'ZUB']
     actualRegistrationListOfPurpleCars = lot.registration_numbers_for_cars_with_color('Purple')
     assert len(expectedRegistrationListOfPurpleCars) == len(actualRegistrationListOfPurpleCars)
     assert sorted(expectedRegistrationListOfPurpleCars) == sorted(actualRegistrationListOfPurpleCars)
-
     # It should only return registration numbers of the specified color of current cars in the lot
     expectedRegistrationListOfGrayCars = ['MNO', 'MON', 'SHAR']
     actualRegistrationListOfGrayCars = lot.registration_numbers_for_cars_with_color('Gray')
@@ -98,20 +96,28 @@ def test_slot_numbers_for_cars_with_color():
     lot.park('GREN', 'Neon')
     lot.leave(ticketX)
     lot.park('SHAR', 'Gray')
-
-        # It should return a list of the slot numbers of all cars with the specified color
+    # It should return a list of the slot numbers of all cars with the specified color
     expectedSlotListOfPurpleCars = [0, 3]
     actualSlotListOfPurpleCars = lot.slot_numbers_for_cars_with_color('Purple')
     assert len(expectedSlotListOfPurpleCars) == len(actualSlotListOfPurpleCars)
     assert sorted(expectedSlotListOfPurpleCars) == sorted(actualSlotListOfPurpleCars)
-
     # It should only return slot numbers of the specified color of current cars in the lot
     expectedSlotListOfGrayCars = [1, 4, 5]
     actualSlotListOfGrayCars = lot.slot_numbers_for_cars_with_color('Gray')
     assert len(expectedSlotListOfGrayCars) == len(actualSlotListOfGrayCars)
     assert sorted(expectedSlotListOfGrayCars) == sorted(actualSlotListOfGrayCars)
 
-
+def slot_number_for_registration_number():
+    lot = create_parking_lot(5)
+    ticket1 = lot.park('JKL', 'Purple')
+    ticket2 = lot.park('MNO', 'Gray')
+    ticket3 = lot.park('PQR', 'Violet')
+    lot.leave(ticket2)
+    # It should return the car's slot number given its registration number
+    assert lot.slot_number_for_registration_number('JKL') == ticket1
+    assert lot.slot_number_for_registration_number('PQR') == ticket3
+    # It should return 'Not found' if given a registration number of a car that does not currently exist in the lot
+    assert lot.slot_number_for_registration_number('MNO') == 'Not found'
 
 
 

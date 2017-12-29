@@ -36,3 +36,13 @@ class create_parking_lot(object):
             currentIdx += 1
         return slots
 
+    def slot_number_for_registration_number(self, registration):
+        currentIdx = 0
+        while (currentIdx < len(self.slots)):
+            currentSlot = self.slots[currentIdx]
+            if (isinstance(currentSlot, dict) and currentSlot.get('plate') is plate):
+                return currentIdx
+            else:
+                currentIdx += 1
+        return 'Not found'
+
