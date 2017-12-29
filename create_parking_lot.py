@@ -8,7 +8,7 @@ class create_parking_lot(object):
         try:
             closestSlotIdx = self.find_closest_spot()
             self.slots[closestSlotIdx] = {'registration': registration, 'color': color}
-            print('Allocated slot number:%s' %(closestSlotIdx))
+            # print('Allocated slot number:%s' %(closestSlotIdx))
             return closestSlotIdx
         except TypeError:
             return 'Sorry, parking lot is full'
@@ -31,7 +31,7 @@ class create_parking_lot(object):
         currentIdx = 0
         while (currentIdx < len(self.slots)):
             currentSlot = self.slots[currentIdx]
-            if (isinstance(currentSlot, dict) and currentSlot.get('color') is color):
+            if (isinstance(currentSlot, dict) and currentSlot.get('color') == color):
                 slots.append(currentIdx)
             currentIdx += 1
         return slots
@@ -40,7 +40,7 @@ class create_parking_lot(object):
         currentIdx = 0
         while (currentIdx < len(self.slots)):
             currentSlot = self.slots[currentIdx]
-            if (isinstance(currentSlot, dict) and currentSlot.get('registration') is registration):
+            if (isinstance(currentSlot, dict) and currentSlot.get('registration') == registration):
                 return currentIdx
             else:
                 currentIdx += 1
