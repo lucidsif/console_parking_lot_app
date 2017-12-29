@@ -8,12 +8,18 @@ def test_parking_lot_instantiation():
     assert isinstance(lot1, create_parking_lot)
 
 def test_parking_lot_slots():
-    lot1 = create_parking_lot(5) 
     lot2 = create_parking_lot(100)   
-    assert isinstance(lot1.slots, list)    
-    assert len(lot1.slots) == 5
+    filledArr = []
+    for slot in lot2.slots:
+        filledArr.append(slot)
     assert isinstance(lot2.slots, list)
     assert len(lot2.slots) == 100
+    assert len(lot2.slots) == len(filledArr)
+    assert sorted(lot2.slots) == sorted(filledArr)
+
+    
+
+
 
 
     
