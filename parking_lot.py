@@ -25,3 +25,14 @@ class create_parking_lot(object):
 
     def registration_numbers_for_cars_with_color(self, color):
         return [slot.get('registration') for slot in self.slots if isinstance(slot, dict) and slot.get('color') == color]
+
+    def slot_numbers_for_cars_with_color(self, color):
+        slots = []
+        currentIdx = 0
+        while (currentIdx < len(self.slots)):
+            currentSlot = self.slots[currentIdx]
+            if (isinstance(currentSlot, dict) and currentSlot.get('color') is color):
+                slots.append(currentIdx)
+            currentIdx += 1
+        return slots
+

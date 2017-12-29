@@ -87,6 +87,30 @@ def test_registration_numbers_for_cars_with_color():
     assert len(expectedRegistrationListOfGrayCars) == len(actualRegistrationListOfGrayCars)
     assert sorted(expectedRegistrationListOfGrayCars) == sorted(actualRegistrationListOfGrayCars)
 
+def test_slot_numbers_for_cars_with_color():
+    lot = create_parking_lot(10)
+    lot.park('JKL', 'Purple')
+    lot.park('MNO', 'Gray')
+    lot.park('PQR', 'Violet')
+    lot.park('ZUB', 'Purple')
+    lot.park('MON', 'Gray')
+    ticketX = lot.park('NOM', 'Gray')
+    lot.park('GREN', 'Neon')
+    lot.leave(ticketX)
+    lot.park('SHAR', 'Gray')
+
+        # It should return a list of the slot numbers of all cars with the specified color
+    expectedSlotListOfPurpleCars = [0, 3]
+    actualSlotListOfPurpleCars = lot.slot_numbers_for_cars_with_color('Purple')
+    assert len(expectedSlotListOfPurpleCars) == len(actualSlotListOfPurpleCars)
+    assert sorted(expectedSlotListOfPurpleCars) == sorted(actualSlotListOfPurpleCars)
+
+    # It should only return slot numbers of the specified color of current cars in the lot
+    expectedSlotListOfGrayCars = [1, 4, 5]
+    actualSlotListOfGrayCars = lot.slot_numbers_for_cars_with_color('Gray')
+    assert len(expectedSlotListOfGrayCars) == len(actualSlotListOfGrayCars)
+    assert sorted(expectedSlotListOfGrayCars) == sorted(actualSlotListOfGrayCars)
+
 
 
 
