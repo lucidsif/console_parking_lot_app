@@ -17,27 +17,26 @@ def parse_user_input():
     print('[q] <string quit>')
     # Split string into a list delimited by white spaces
     return input("What would you like to do? ").split()
-    
-### MAIN PROGRAM ###
 
-# Set up a loop where users can choose what they'd like to do.
-choice = ['']
-display_title_bar()
-while choice[0] != 'q':    
-    
-    choice = parse_user_input()
-    
-    # Respond to the user's input.
+def initialize_console_app():
+    # Set up a loop where users can choose what they'd like to do.
+    choice = ['']
     display_title_bar()
-    if choice[0] == 'create_parking_lot':
-        print("\nParking lot created\n")
-    elif choice[0] == 'park':
-        print("\nCar parked!\n")
-    elif choice[0] == 'q':
-        print("\nThanks for using the parking lot program!")
-    else:
-        print(choice)
-        print("\nI didn't understand that input.\n")
+    while choice[0] != 'q':    
+        choice = parse_user_input()
+        # Respond to the user's input.
+        display_title_bar()
+        if choice[0] == 'create_parking_lot':
+            print("\nParking lot created!\n")
+        elif choice[0] == 'park':
+            print("\nCar parked!\n")
+        elif choice[0] == 'q':
+            print("\nThanks for using the parking lot program!")
+        else:
+            print(choice)
+            print("\nI didn't understand that input.\n")
+
+initialize_console_app()
 
 
     
