@@ -8,7 +8,6 @@ class create_parking_lot(object):
         try:
             closestSlotIdx = self.find_closest_spot()
             self.slots[closestSlotIdx] = {'registration': registration, 'color': color}
-            # print('Allocated slot number:%s' %(closestSlotIdx))
             return closestSlotIdx
         except TypeError:
             return 'Sorry, parking lot is full'

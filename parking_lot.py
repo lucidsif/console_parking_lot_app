@@ -44,7 +44,10 @@ def initialize_console_app():
                 registration = choice[1]
                 color = choice[2]
                 ticket = lot.park(registration, color)
-                print('Allocated slot number:%s' %(ticket))
+                if type(ticket) is int:
+                    print('Allocated slot number:%s' %(ticket))
+                else:
+                    print(ticket)
             elif choice[0] == 'leave':
                 ticket = int(choice[1])
                 print(lot.leave(ticket))
