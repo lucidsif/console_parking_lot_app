@@ -33,7 +33,7 @@ def initialize_console_app():
     display_title_bar() 
     # Initialize choice to be an array with a single empty string for command line arguments parsing.
     choice = ['']
-    # Initialize isLotCreated state for better UX and program robustness.
+    # Initialize lot state
     lot = None
     # Set up a loop where users can choose what they'd like to do.    
     while choice[0] != 'q':   
