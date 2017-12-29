@@ -40,7 +40,7 @@ class create_parking_lot(object):
         currentIdx = 0
         while (currentIdx < len(self.slots)):
             currentSlot = self.slots[currentIdx]
-            if (isinstance(currentSlot, dict) and currentSlot.get('plate') is plate):
+            if (isinstance(currentSlot, dict) and currentSlot.get('registration') is registration):
                 return currentIdx
             else:
                 currentIdx += 1
