@@ -32,11 +32,7 @@ def initialize_console_app():
         choice = display_options_and_parse_user_input(isLotCreated)
         # Respond to the user's input.
         display_title_bar()
-        if isLotCreated == False:
-            if choice[0] == 'create_parking_lot':
-                isLotCreated = True
-                print("\nParking lot created!\n")
-        else:
+        if isLotCreated == True:
             if choice[0] == 'park':
                 print("\nCar parked!\n")
             elif choice[0] == 'q':
@@ -44,6 +40,14 @@ def initialize_console_app():
             else:
                 print(choice)
                 print("\nI didn't understand that input.\n")
+        else:
+            if choice[0] == 'create_parking_lot':
+                isLotCreated = True
+                print("\nParking lot created!\n")
+            else:
+                print(choice)
+                print("\nI didn't understand that input.\n")
+
 
 initialize_console_app()
 
