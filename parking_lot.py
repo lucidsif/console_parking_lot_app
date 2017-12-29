@@ -15,6 +15,7 @@ def display_options_and_parse_user_input(lot):
     # Let users know what they can do based on whether they have created a lot or not.  
     if isinstance(lot, create_parking_lot) :
         print('\n')
+        display_title_bar()        
         print('[park] <string registration> <string color>')
         print('[leave] <integer ticket>')
         print('[registration_numbers_for_cars_with_color] <string color')
@@ -75,11 +76,10 @@ def initialize_console_app():
                 numOfSlots = int(choice[1])
                 lot = create_parking_lot(numOfSlots)
             elif choice[0] == 'q':
-                print("\nThanks for using the parking lot program!")
+                print("\nThanks for using my parking lot program!")
             else:
                 print(choice)
                 print("\nI didn't understand that input.\n")
-        display_title_bar()
 
 initialize_console_app()
 
