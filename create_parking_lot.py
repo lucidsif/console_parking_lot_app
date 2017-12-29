@@ -44,3 +44,18 @@ class create_parking_lot(object):
             else:
                 currentIdx += 1
         return 'Not found'
+    
+    def status(self):
+        filledSlots = []
+        currentIdx = 0
+        while(currentIdx < len(self.slots)):
+            currentSlot = self.slots[currentIdx]
+            if (isinstance(currentSlot, dict)):
+                vehicleInformation = {
+                    'slot': currentIdx,
+                    'registration': currentSlot['registration'],
+                    'color': currentSlot['color']
+                }
+                filledSlots.append(vehicleInformation)
+            currentIdx += 1
+        return filledSlots

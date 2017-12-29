@@ -119,6 +119,29 @@ def slot_number_for_registration_number():
     # It should return 'Not found' if given a registration number of a car that does not currently exist in the lot
     assert lot.slot_number_for_registration_number('MNO') == 'Not found'
 
+def test_status():
+    lot = create_parking_lot(10)
+    lot.park('KA-01-HH-1234', 'White')
+    lot.park('KA-01-HH-9999', 'White')
+    lot.park('KA-01-BB-0001', 'Black')
+    ticket4 = lot.park('KA-01-HH-7777', 'Red')
+    lot.park('KA-01-HH-2701', 'Blue')
+    lot.park('KA-01-HH-3141', 'Black')
+    lot.leave(ticket4)
+    expectedArr = [
+        {'slot': 0, 'registration': 'KA-01-HH-1234', 'color': 'White'},
+        {'slot': 1, 'registration': 'KA-01-HH-9999', 'color': 'White'},
+        {'slot': 2, 'registration': 'KA-01-BB-0001', 'color': 'Black'},
+        {'slot': 4, 'registration': 'KA-01-HH-2701', 'color': 'Blue'},
+        {'slot': 5, 'registration': 'KA-01-HH-3141', 'color': 'Black'},
+    ]
+    actualArr = lot.status()
+    # The array should contain only the cars currently in the lot and all the cars in the lot
+    # It should return an array of objects where each object has the slot number, registration, and color    
+    assert len(expectedArr) == len(actualArr)
+    assert sorted(expectedArr, key=lambda k: k['slot']) == sorted(actualArr, key=lambda k: k['slot'])
+
+
 
 
     
