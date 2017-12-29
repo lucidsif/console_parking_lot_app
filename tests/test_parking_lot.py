@@ -4,18 +4,47 @@ sys.path.insert(0, myPath + '/../')
 from parking_lot import create_parking_lot
 
 def test_parking_lot_instantiation():
-    lot1 = create_parking_lot(0)
-    assert isinstance(lot1, create_parking_lot)
+    lot = create_parking_lot(0)
+    # lot1 should be an instance of the parking lot class
+    assert isinstance(lot, create_parking_lot)
 
 def test_parking_lot_slots():
-    lot2 = create_parking_lot(100)   
-    filledArr = []
-    for slot in lot2.slots:
-        filledArr.append(slot)
-    assert isinstance(lot2.slots, list)
-    assert len(lot2.slots) == 100
-    assert len(lot2.slots) == len(filledArr)
-    assert sorted(lot2.slots) == sorted(filledArr)
+    lot = create_parking_lot(6)   
+    expectedArr = []
+    for num in range(6):
+        expectedArr.append(False)
+    # A parking lot instance should have a slots property that is a data type of list
+    assert isinstance(lot.slots, list)
+    # the number of slots in the parking lot should be equal to the number passed to the class during instantiation
+    assert len(lot.slots) == 6
+    # the expectedArr list should be deeply equal to the slots list of the parking lot instance
+    assert len(lot.slots) == len(expectedArr)
+    assert sorted(lot.slots) == sorted(expectedArr)
+
+def test_park():
+    lot = create_parking_lot(5)
+    ticket = lot.park('KA-01-HH-1234', 'White')
+    # the ticket should be equal to the index the vehicle is parked in
+    assert ticket == 0
+
+def test_find_closest_spot():
+    lot = create_parking_lot(5)
+    assert lot.find_closest_spot() == 0
+    firstTicket = lot.park('ABC', 'Blue')
+    # After parking one car, the next available slot should have index of 1
+    assert lot.find_closest_spot() == 1
+    # After parking two additional cars (total of 3 cars), the next available slot should have index of 2
+    secondTicket = lot.park('DEF', 'Red')
+    thirdTicket = lot.park('GHI', 'White')
+    assert lot.find_closest_spot() == 3
+    # When the first car leaves, the next available slot should have index of 0
+    lot.leave(firstTicket)
+    assert lot.find_closest_spot() == 0
+
+def test_leave():
+    pass
+
+
 
     
 
