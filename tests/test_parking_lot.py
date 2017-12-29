@@ -63,8 +63,29 @@ def test_leave():
     # There should be no car at a slot once it leaves
     assert lot.slots[firstTicket] is False
 
-def registration_numbers_for_cars_with_color():
-    lot = create_parking_lot(5)
+def test_registration_numbers_for_cars_with_color():
+    lot = create_parking_lot(10)
+    lot.park('JKL', 'Purple')
+    lot.park('MNO', 'Gray')
+    lot.park('PQR', 'Violet')
+    lot.park('ZUB', 'Purple')
+    lot.park('MON', 'Gray')
+    ticketX = lot.park('NOM', 'Gray')
+    lot.park('GREN', 'Neon')
+    lot.leave(ticketX)
+    lot.park('SHAR', 'Gray')
+
+    # It should return a list of the registration numbers of all cars with the specified color
+    expectedRegistrationListOfPurpleCars = ['JKL', 'ZUB']
+    actualRegistrationListOfPurpleCars = lot.registration_numbers_for_cars_with_color('Purple')
+    assert len(expectedRegistrationListOfPurpleCars) == len(actualRegistrationListOfPurpleCars)
+    assert sorted(expectedRegistrationListOfPurpleCars) == sorted(actualRegistrationListOfPurpleCars)
+
+    # It should only return registration numbers of the specified color of current cars in the lot
+    expectedRegistrationListOfGrayCars = ['MNO', 'MON', 'SHAR']
+    actualRegistrationListOfGrayCars = lot.registration_numbers_for_cars_with_color('Gray')
+    assert len(expectedRegistrationListOfGrayCars) == len(actualRegistrationListOfGrayCars)
+    assert sorted(expectedRegistrationListOfGrayCars) == sorted(actualRegistrationListOfGrayCars)
 
 
 

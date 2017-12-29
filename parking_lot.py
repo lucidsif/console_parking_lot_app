@@ -21,3 +21,6 @@ class create_parking_lot(object):
     def leave(self, ticketNumber):
         self.slots[ticketNumber] = False
         return "Slot number %s is free" %(ticketNumber)
+
+    def registration_numbers_for_cars_with_color(self, color):
+        return [slot.get('registration') for slot in self.slots if isinstance(slot, dict) and slot.get('color') == color]
