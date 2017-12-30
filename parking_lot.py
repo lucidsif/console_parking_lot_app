@@ -88,8 +88,12 @@ def initialize_console_app():
         lineInputs = []
         with open(fileInput,'r') as i:
             lineInputs = i.readlines()
-        print(lineInputs[0])
-        # Clean each command and pass to the program
+        for command in lineInputs:
+            output = process_input(command.split(), lot)
+            # Only reassign the lot state if a parking lot instance is created in process_input            
+            if (isinstance(output, create_parking_lot)):
+                lot = output
+        return 'EOF reached!'
         
     # Set up a loop where users can choose what they'd like to do.    
     while user_input[0] != 'q':
@@ -99,8 +103,6 @@ def initialize_console_app():
         # Only reassign the lot state if a parking lot instance is created in process_input
         if (isinstance(output, create_parking_lot)):
             lot = output
-
-
 
 initialize_console_app()
 
