@@ -25,7 +25,6 @@ def test_display_options(capsys):
         display_options(lotContainer)
         out, err = capsys.readouterr()
         assert out == expectedPrintForUninitializedLot
-    
     def initialized_lot():
         # An initialized lot should print only print 'park', 'leave', 
         # 'registration_numbers_for_cars_with_color', 'slot_numbers_for_cars_with_color', 
@@ -63,7 +62,6 @@ def test_process_input(capsys):
     # Response messages
     quitResponse = "\nThanks for using the parking lot program!"
     invalidResponse = "\nI didn't understand that input.\n\n"
-
     def uninitialized_lot():
             def test_create_parking_lot_cmd():
                 lotContainer = [None]
@@ -89,12 +87,34 @@ def test_process_input(capsys):
             test_create_parking_lot_cmd()
             test_quit_cmd()
             test_invalid_cmd()
-
     def initialized_lot():
-        lotContainer = [create_parking_lot(10)]
+        # Test data
+        car1Registration = 'XAB-741'
+        car1Color = 'Black'
+        car2Registration = 'YUN-410'
+        car2Color = 'Black'
+        car3Registration = 'ZUM-400'
+        car3Color = 'Red'
+        lotContainer = [None]
+        with capsys.disabled():
+            initializedLot = create_parking_lot(10)
+            initializedLot.park(car1Registration, car1Registration)
+            initializedLot.park(car2Registration, car2Color)
+            initializedLot.park(car3Registration, car3Color)
+            lotContainer[0] = initializedLot
         def test_park_cmd():
-            pass
+            process_input([park, 'CRUD-100', 'Purple'], lotContainer)
+            out, err = capsys.readouterr()    
+            assert out == 'Allocated slot number:3\n'
+        def test_leave_cmd():
+            process_input([leave, 0], lotContainer)
+            out, err = capsys.readouterr()    
+            assert out == 'Slot number 0 is free\n'
+        test_park_cmd()
+        test_leave_cmd()
+        
     uninitialized_lot()
+    initialized_lot()
 
     
 
