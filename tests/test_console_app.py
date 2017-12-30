@@ -103,15 +103,26 @@ def test_process_input(capsys):
             initializedLot.park(car3Registration, car3Color)
             lotContainer[0] = initializedLot
         def test_park_cmd():
-            process_input([park, 'CRUD-100', 'Purple'], lotContainer)
+            process_input([park, 'CRUD-100', 'Black'], lotContainer)
             out, err = capsys.readouterr()    
             assert out == 'Allocated slot number:3\n'
         def test_leave_cmd():
             process_input([leave, 0], lotContainer)
             out, err = capsys.readouterr()    
             assert out == 'Slot number 0 is free\n'
+        def test_registration_numbers_for_cars_with_color_cmd():
+            process_input([registrationNumbersForCarsWithColor, 'Black'], lotContainer)
+            out, err = capsys.readouterr()    
+            assert out == "'YUN-410', 'CRUD-100'\n"
+        def test_slot_numbers_for_cars_with_color_cmd():
+            process_input([slotNumbersForCarsWithColor, 'Black'], lotContainer)
+            out, err = capsys.readouterr()    
+            assert out == '1, 3\n'
+
         test_park_cmd()
         test_leave_cmd()
+        test_registration_numbers_for_cars_with_color_cmd()
+        test_slot_numbers_for_cars_with_color_cmd()
         
     uninitialized_lot()
     initialized_lot()
