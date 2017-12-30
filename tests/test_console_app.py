@@ -1,5 +1,7 @@
 import sys, os
 from mock import patch
+import mock
+import builtins
 myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, myPath + '/../')
 from create_parking_lot import create_parking_lot
@@ -186,6 +188,7 @@ def test_process_file_input(capsys):
             out, err = capsys.readouterr()
             assert out == expectedPrintOutput
     def test_no_file_name_passed():
+        # It should not call process_file_input if there isn't a filename passed to it.
         testargs = ["console_app.py"]
         expectedPrintOutput = ''
         with patch.object(sys, 'argv', testargs):
@@ -194,6 +197,23 @@ def test_process_file_input(capsys):
             assert out == expectedPrintOutput
     test_file_name_passed()
     test_no_file_name_passed()
+
+def test_process_user_input(monkeypatch):
+    # This should allow a user to enter an infinite loop where they can
+    # send user commands or quit
+    uninitializedLotContainer = [None]  
+    # Monkeypatch input
+    monkeypatch.setattr(builtins, 'input', lambda x: 'Anything here')
+    # TODO: Find way to test an infinite loop that can be cancelled by user    
+    pass    
+
+def test_initialize_console_app():
+    # This should check if the function initializes a lotContainer, calls os.system(), display_title_bar(),
+    # and calls process_file_input and process_user_input with a lotContainer
+    uninitializedLotContainer = [None]     
+    pass   
+    
+
 
     
 
