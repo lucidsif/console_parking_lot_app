@@ -12,9 +12,6 @@ def display_title_bar():
     print("\t*******     How can we help you?      *******")
     print("\t**********************************************")
 
-def process_file_input():
-    pass
-
 def display_options(lot):
     # Let users know what they can do based on whether they have created a lot or not.  
     if isinstance(lot, create_parking_lot) :
@@ -30,6 +27,9 @@ def display_options(lot):
     else:
         print('[create_parking_lot] <int slots>')
         print('[q] <string quit>')
+
+def handle_command_missing_args():
+    pass
 
 def process_input(command, lot):
     # Respond to the input based on whether they created a lot or not and the exact method being called.
@@ -76,6 +76,18 @@ def process_input(command, lot):
             print(command)
             print("\nI didn't understand that input.\n")
 
+def process_file_input(lot):
+    if len(sys.argv) == 2:
+        fileInput = sys.argv[1]
+        lineInputs = []
+        with open(fileInput,'r') as i:
+            lineInputs = i.readlines()
+        for command in lineInputs:
+            output = process_input(command.split(), lot)
+            # Only reassign the lot state if a parking lot instance is created in process_input.            
+            if (isinstance(output, create_parking_lot)):
+                lot = output
+
 def initialize_console_app():
     # Clears the terminal screen, and displays a title bar. 
     os.system('clear') 
@@ -95,7 +107,7 @@ def initialize_console_app():
             # Only reassign the lot state if a parking lot instance is created in process_input.            
             if (isinstance(output, create_parking_lot)):
                 lot = output
-           
+    # process_file_input()
     # Set up a loop where users can choose what they'd like to do.    
     while user_input[0] != 'q':
         display_options(lot)   
