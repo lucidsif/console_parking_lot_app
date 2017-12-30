@@ -12,7 +12,9 @@ def display_title_bar():
     print("\t*******     How can we help you?      *******")
     print("\t**********************************************")
 
-def display_options(lot):
+def display_options(lotContainer):
+    # See initialize_console_app() for information on lotContainer
+    lot = lotContainer[0]
     # Let users know what they can do based on whether they have created a lot or not.  
     if isinstance(lot, create_parking_lot) :
         print('\n')
@@ -31,7 +33,9 @@ def display_options(lot):
 def handle_command_missing_args():
     pass
 
-def process_input(command, lot):
+def process_input(command, lotContainer):
+    # See initialize_console_app() for information on lotContainer
+    lot = lotContainer[0]
     # Respond to the input based on whether they created a lot or not and the exact method being called.
     if isinstance(lot, create_parking_lot):
         if command[0] == 'park':
@@ -68,54 +72,44 @@ def process_input(command, lot):
     else:
         if command[0] == 'create_parking_lot':
             numOfSlots = int(command[1])
-            lot = create_parking_lot(numOfSlots)
-            return lot
+            lotContainer[0] = create_parking_lot(numOfSlots)
+            # return lot
         elif command[0] == 'q':
             print("\nThanks for using my parking lot program!")
         else:
             print(command)
             print("\nI didn't understand that input.\n")
 
-def process_file_input(lot):
+def process_file_input(lotContainer):
+    # If a filename as been sent as input for the program at launch, parse the file into inputs 
+    # and feed each input line to process_input()     
     if len(sys.argv) == 2:
         fileInput = sys.argv[1]
         lineInputs = []
         with open(fileInput,'r') as i:
             lineInputs = i.readlines()
         for command in lineInputs:
-            output = process_input(command.split(), lot)
-            # Only reassign the lot state if a parking lot instance is created in process_input.            
-            if (isinstance(output, create_parking_lot)):
-                lot = output
+            process_input(command.split(), lotContainer)   
 
-def initialize_console_app():
-    # Clears the terminal screen, and displays a title bar. 
-    os.system('clear') 
-    display_title_bar() 
+def process_user_input(lotContainer):
     # Initialize choice to be an array with a single empty string for command line arguments parsing.
     user_input = ['']
-    # Initialize lot state
-    lot = None
-    # If a filename as been sent as input for the program at launch, process that file.
-    if len(sys.argv) == 2:
-        fileInput = sys.argv[1]
-        lineInputs = []
-        with open(fileInput,'r') as i:
-            lineInputs = i.readlines()
-        for command in lineInputs:
-            output = process_input(command.split(), lot)
-            # Only reassign the lot state if a parking lot instance is created in process_input.            
-            if (isinstance(output, create_parking_lot)):
-                lot = output
-    # process_file_input()
-    # Set up a loop where users can choose what they'd like to do.    
+    # Set up a loop where users can choose what they'd like to do.
     while user_input[0] != 'q':
-        display_options(lot)   
+        display_options(lotContainer)   
         user_input = input("What would you like to do? ").split()
-        output = process_input(user_input, lot)
-        # Only reassign the lot state if a parking lot instance is created in process_input.
-        if (isinstance(output, create_parking_lot)):
-            lot = output
+        process_input(user_input, lotContainer)
+
+def initialize_console_app():
+    # Clears the terminal screen and display a title bar. 
+    os.system('clear') 
+    display_title_bar() 
+    # Initialize lot state in a list so we can pass lot by reference to functions. 
+    lotContainer = [None]
+    process_file_input(lotContainer)
+    process_user_input(lotContainer)
+    
+
 
 initialize_console_app()
 
