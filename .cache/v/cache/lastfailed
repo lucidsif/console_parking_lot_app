@@ -1,4 +1,5 @@
 {
+  "tests/test_console_app.py::test_display_options_with_initialized_lot": true,
   "tests/test_console_app.py::test_first": true,
   "tests/test_console_app.py::test_myoutput": true
 }

@@ -1,4 +1,4 @@
-# Sif's Parking Lot
+# Terminal Parking Lot App
 
 A parking lot program in your terminal that can accept file input and user input. It's pretty awesome.
 

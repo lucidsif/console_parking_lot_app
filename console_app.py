@@ -7,12 +7,10 @@ from create_parking_lot import create_parking_lot
 ### FUNCTIONS ### 
 
 def display_title_bar():    
-    line1 = "\t**********************************************\n"
-    line2 = "\t**  Welcome to Sif's parking lot program!  **\n"
-    line3 = "\t*******     How can we help you?      *******\n"
-    line4 = "\t**********************************************\n"
-    expectedPrint = line1 + line2 + line3 + line4
-    print(expectedPrint)
+    print("\t**********************************************")
+    print("\t**  Welcome to Sif's parking lot program!  **")
+    print("\t*******     How can we help you?      *******")
+    print("\t**********************************************")
 
 def display_options(lotContainer):
     # See initialize_console_app() for information on lotContainer
@@ -31,9 +29,6 @@ def display_options(lotContainer):
     else:
         print('[create_parking_lot] <int slots>')
         print('[q] <string quit>')
-
-def handle_command_missing_args():
-    pass
 
 def process_input(command, lotContainer):
     # See initialize_console_app() for information on lotContainer
@@ -75,7 +70,6 @@ def process_input(command, lotContainer):
         if command[0] == 'create_parking_lot':
             numOfSlots = int(command[1])
             lotContainer[0] = create_parking_lot(numOfSlots)
-            # return lot
         elif command[0] == 'q':
             print("\nThanks for using my parking lot program!")
         else:
