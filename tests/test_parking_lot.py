@@ -141,6 +141,20 @@ def test_status():
     assert len(expectedArr) == len(actualArr)
     assert sorted(expectedArr, key=lambda k: k['slot']) == sorted(actualArr, key=lambda k: k['slot'])
 
+def test_check_if_registration_unique():
+    lot = create_parking_lot(5)
+    lot.park('KA-01-HH-9990', 'White')
+    lot.park('KA-01-HH-9991', 'White')
+    # Checking a unique registration should return true.
+    assert lot.check_if_registration_unique('KA-01-HH-9992') == True
+    # Checking a registration that already exists in the lot should return false.
+    lot.park('KA-01-HH-9990', 'Black')
+    assert lot.check_if_registration_unique('KA-01-HH-9990') == False
+
+
+    
+
+
 
 
 

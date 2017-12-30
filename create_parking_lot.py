@@ -4,7 +4,17 @@ class create_parking_lot(object):
         for num in range(numOfSlots):
             self.slots.append(False)
         print('Created a parking lot with %s slots' %(numOfSlots))
+
+    def check_if_registration_unique(self, registration):
+        for slot in self.slots:
+            if isinstance(slot, dict) and slot['registration'] == registration:
+                return False
+        return True   
+
     def park(self, registration, color):
+        isRegistrationUnique = self.check_if_registration_unique(registration)
+        if isRegistrationUnique == False:
+            return 'Sorry, that registration already exists in our lot.'
         try:
             closestSlotIdx = self.find_closest_spot()
             self.slots[closestSlotIdx] = {'registration': registration, 'color': color}
@@ -59,3 +69,5 @@ class create_parking_lot(object):
                 filledSlots.append(vehicleInformation)
             currentIdx += 1
         return filledSlots
+
+
