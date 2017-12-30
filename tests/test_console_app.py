@@ -18,7 +18,7 @@ def test_display_title_bar(capsys):
 def test_display_options(capsys):
     quitOption = '[q] <string quit>\n'
     def uninitialized_lot():
-        # An uninitialized lot should print only 'create_parking_lot' and 'quit'
+        # An uninitialized lot should print only 'create_parking_lot' and 'quit'.
         lotContainer = [None]
         createParkingLotOption = '[create_parking_lot] <int slots>\n'
         expectedPrintForUninitializedLot = createParkingLotOption + quitOption
@@ -28,7 +28,7 @@ def test_display_options(capsys):
     def initialized_lot():
         # An initialized lot should print only print 'park', 'leave', 
         # 'registration_numbers_for_cars_with_color', 'slot_numbers_for_cars_with_color', 
-        # 'slot_number_for_registration_number', 'status', and 'quit' options
+        # 'slot_number_for_registration_number', 'status', and 'quit' options.
         lotContainer = [None]
         with capsys.disabled():
             initializedLot = create_parking_lot(10)
@@ -66,21 +66,21 @@ def test_process_input(capsys):
             def test_create_parking_lot_cmd():
                 lotContainer = [None]
                 # A create_parking_lot command passed to process_input should call the
-                # create_parking_lot() method 
+                # create_parking_lot() method .
                 process_input([createParkingLot, 10], lotContainer)
                 out, err = capsys.readouterr()    
                 assert out == 'Created a parking lot with 10 slots\n'
-                # It should mutate the lotContainer by replacing the None with a create_parking_lot instance
+                # It should mutate the lotContainer by replacing the None with a create_parking_lot instance.
                 assert isinstance(lotContainer[0], create_parking_lot)
             def test_quit_cmd():
                 lotContainer = [None]                
-                # It should print a thank you message when the quit command is given
+                # It should print a thank you message when the quit command is given.
                 process_input([quitCmd], lotContainer)
                 out, err = capsys.readouterr()
                 assert out == "\nThanks for using my parking lot program!\n"
             def test_invalid_cmd():
                 lotContainer = [None]                
-                # It should print an apology message for the invalid input
+                # It should print an apology message for the invalid input.
                 process_input([invalidInput], lotContainer)
                 out, err = capsys.readouterr()
                 assert out == invalidResponse
@@ -103,31 +103,45 @@ def test_process_input(capsys):
             initializedLot.park(car3Registration, car3Color)
             lotContainer[0] = initializedLot
         def test_park_cmd():
+            # It should print a message describing the slot number allocated.
             process_input([park, 'CRUD-100', 'Black'], lotContainer)
             out, err = capsys.readouterr()    
             assert out == 'Allocated slot number:3\n'
         def test_leave_cmd():
+            # It should print a message describing  the slot number freed.
             process_input([leave, 0], lotContainer)
             out, err = capsys.readouterr()    
             assert out == 'Slot number 0 is free\n'
         def test_registration_numbers_for_cars_with_color_cmd():
+            # It should print a list of registration numbers of cars with that color.
             process_input([registrationNumbersForCarsWithColor, 'Black'], lotContainer)
             out, err = capsys.readouterr()    
             assert out == "'YUN-410', 'CRUD-100'\n"
         def test_slot_numbers_for_cars_with_color_cmd():
+            # It should print a list of slot numbers of cars with that color.
             process_input([slotNumbersForCarsWithColor, 'Black'], lotContainer)
             out, err = capsys.readouterr()    
             assert out == '1, 3\n'
         def test_slot_number_for_registration_number_cmd():
+            # It should print the slot number of the car with that registration number.
             process_input([slotNumberForCarWithRegistrationNumber, 'YUN-410'], lotContainer)
             out, err = capsys.readouterr()    
             assert out == '1\n'
         def test_status_cmd():
+            # It should print a list of cars in the garage with their slot number, registration number, and color.
             process_input([status], lotContainer)
             out, err = capsys.readouterr()    
             assert out == '1 YUN-410 Black\n2 ZUM-400 Red\n3 CRUD-100 Black\n'
-
-
+        def test_quit_cmd():              
+            # It should print a thank you message when the quit command is given.
+            process_input([quitCmd], lotContainer)
+            out, err = capsys.readouterr()
+            assert out == "\nThanks for using my parking lot program!\n"
+        def test_invalid_cmd():           
+            # It should print an apology message for the invalid input.
+            process_input([invalidInput], lotContainer)
+            out, err = capsys.readouterr()
+            assert out == invalidResponse
         test_park_cmd()
         test_leave_cmd()
         test_registration_numbers_for_cars_with_color_cmd()
@@ -135,7 +149,6 @@ def test_process_input(capsys):
         test_slot_numbers_for_cars_with_color_cmd
         test_slot_number_for_registration_number_cmd()
         test_status_cmd()
-        
     uninitialized_lot()
     initialized_lot()
 
