@@ -16,11 +16,11 @@ def test_display_title_bar(capsys):
     assert out == expectedPrint
 
 def test_display_options(capsys):
+    quitOption = '[q] <string quit>\n'
     def uninitialized_lot():
         # An uninitialized lot should print only 'create_parking_lot' and 'quit'
         lotContainer = [None]
         createParkingLotOption = '[create_parking_lot] <int slots>\n'
-        quitOption = '[q] <string quit>\n'
         expectedPrintForUninitializedLot = createParkingLotOption + quitOption
         display_options(lotContainer)
         out, err = capsys.readouterr()
@@ -30,7 +30,7 @@ def test_display_options(capsys):
         # An initialized lot should print only print 'park', 'leave', 
         # 'registration_numbers_for_cars_with_color', 'slot_numbers_for_cars_with_color', 
         # 'slot_number_for_registration_number', 'status', and 'quit' options
-        lotContainer = [create_parking_lot(10)]
+        lotContainer = [None]
         with capsys.disabled():
             initializedLot = create_parking_lot(10)
             lotContainer[0] = initializedLot
@@ -46,6 +46,8 @@ def test_display_options(capsys):
         display_options(lotContainer)
         out, err = capsys.readouterr()
         assert out == expectedPrintForInitializedLot
+    uninitialized_lot()
+    initialized_lot()
 
 def test_process_input(capsys):
     # Input commands
