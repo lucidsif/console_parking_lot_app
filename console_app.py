@@ -63,7 +63,6 @@ def process_input(command, lotContainer):
         elif command[0] == 'q':
             print("\nThanks for using the parking lot program!")
         else:
-            print(command)
             print("\nI didn't understand that input.\n")
     else:
         if command[0] == 'create_parking_lot':
@@ -72,7 +71,6 @@ def process_input(command, lotContainer):
         elif command[0] == 'q':
             print("\nThanks for using my parking lot program!")
         else:
-            print(command)
             print("\nI didn't understand that input.\n")
 
 def process_file_input(lotContainer):
