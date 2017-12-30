@@ -17,8 +17,7 @@ def display_options(lotContainer):
     lot = lotContainer[0]
     # Let users know what they can do based on whether they have created a lot or not.  
     if isinstance(lot, create_parking_lot) :
-        print('\n')
-        display_title_bar()        
+        print('\n')       
         print('[park] <string registration> <string color>')
         print('[leave] <integer ticket>')
         print('[registration_numbers_for_cars_with_color] <string color')

@@ -6,13 +6,13 @@ process_user_input, initialize_console_app, create_parking_lot)
 
 def test_display_title_bar(capsys):
     display_title_bar()
-    captured = capsys.readouterr()
+    out, err = capsys.readouterr()
     line1 = "\t**********************************************\n"
     line2 = "\t**  Welcome to Sif's parking lot program!  **\n"
     line3 = "\t*******     How can we help you?      *******\n"
     line4 = "\t**********************************************\n"
     expectedPrint = line1 + line2 + line3 + line4
-    assert captured.out == expectedPrint
+    assert out == expectedPrint
 
 def test_display_options(capsys):
     # An uninitialized lot should print only 'create_parking_lot' and 'quit'
@@ -30,18 +30,17 @@ def test_display_options(capsys):
         initializedLot = create_parking_lot(10)
         lotContainer[0] = initializedLot
     parkOption = '[park] <string registration> <string color>\n'
-    leaveOption = '[leave] <integer ticket>'
-    registrationNumberForCarsWithColorOption = '[registration_numbers_for_cars_with_color] <string color'
-    slotNumbersForCarsWithColorOption = '[slot_numbers_for_cars_with_color] <string color'
-    slotNumberForRegistrationNumberOption = '[slot_number_for_registration_number] <string registration>'
-    statusOption = '[status]'
-    expectedPrintForInitializedLot = (quitOption + leaveOption + 
+    leaveOption = '[leave] <integer ticket>\n'
+    registrationNumberForCarsWithColorOption = '[registration_numbers_for_cars_with_color] <string color\n'
+    slotNumbersForCarsWithColorOption = '[slot_numbers_for_cars_with_color] <string color\n'
+    slotNumberForRegistrationNumberOption = '[slot_number_for_registration_number] <string registration>\n'
+    statusOption = '[status]\n'
+    expectedPrintForInitializedLot = ('\n\n' + parkOption + leaveOption + 
     registrationNumberForCarsWithColorOption + slotNumbersForCarsWithColorOption +
     slotNumberForRegistrationNumberOption + statusOption + quitOption)
     display_options(lotContainer)
     out, err = capsys.readouterr()
-    # capsys.disabled() is currently buggy so this assertion is failing.
-    # assert out == expectedPrintForInitializedLot
+    assert out == expectedPrintForInitializedLot
 
     
 
