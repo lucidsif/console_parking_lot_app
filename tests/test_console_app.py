@@ -1,4 +1,5 @@
 import sys, os
+from mock import patch
 myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, myPath + '/../')
 from create_parking_lot import create_parking_lot
@@ -45,6 +46,7 @@ def test_display_options(capsys):
         display_options(lotContainer)
         out, err = capsys.readouterr()
         assert out == expectedPrintForInitializedLot
+    # Invoke the subtests.
     uninitialized_lot()
     initialized_lot()
 
@@ -84,11 +86,12 @@ def test_process_input(capsys):
                 process_input([invalidInput], lotContainer)
                 out, err = capsys.readouterr()
                 assert out == invalidResponse
+        # Invoke the 2nd level subtests.            
             test_create_parking_lot_cmd()
             test_quit_cmd()
             test_invalid_cmd()
     def test_initialized_lot():
-        # Test data
+        # Test data.
         car1Registration = 'XAB-741'
         car1Color = 'Black'
         car2Registration = 'YUN-410'
@@ -142,6 +145,7 @@ def test_process_input(capsys):
             process_input([invalidInput], lotContainer)
             out, err = capsys.readouterr()
             assert out == invalidResponse
+        # Invoke the 2nd level subtests.
         test_park_cmd()
         test_leave_cmd()
         test_registration_numbers_for_cars_with_color_cmd()
@@ -149,8 +153,37 @@ def test_process_input(capsys):
         test_slot_numbers_for_cars_with_color_cmd
         test_slot_number_for_registration_number_cmd()
         test_status_cmd()
+    # Invoke the subtests.
     test_uninitialized_lot()
     test_initialized_lot()
+
+def test_process_file_input(capsys):
+    # It should call process_input if there is a filename passed to it.
+    uninitializedLotContainer = [None]
+    testargs = ["console_app.py", "file_inputs.txt"]
+    expectedPrintOutput = ('Created a parking lot with 6 slots\n' +
+    'Allocated slot number:0\n' +
+    'Allocated slot number:1\n' +
+    'Allocated slot number:2\n' +
+    'Allocated slot number:3\n' +
+    'Allocated slot number:4\n' +
+    'Allocated slot number:5\n' +
+    'Slot number 4 is free\n' +
+    '0 KA-01-HH-1234 White\n' +
+    '1 KA-01-HH-9999 White\n' +
+    '2 KA-01-BB-0001 Black\n' +
+    '3 KA-01-HH-7777 Red\n' +
+    '5 KA-01-HH-3141 Black\n' +
+    'Allocated slot number:4\n' +
+    'Sorry, parking lot is full\n' +
+    "'KA-01-HH-1234', 'KA-01-HH-9999', 'KA-01-P-333'\n" +
+    '0, 1, 4\n' +
+    '5\n' +
+    'Not found\n')
+    with patch.object(sys, 'argv', testargs):
+        process_file_input(uninitializedLotContainer)
+        out, err = capsys.readouterr()
+        assert out == expectedPrintOutput
 
     
 
