@@ -8,7 +8,8 @@ from create_parking_lot import create_parking_lot
 
 def display_title_bar():    
     print("\t**********************************************")
-    print("\t***  Welcome to Sif's parking lot program. How can we help you?  ***")
+    print("\t***  Welcome to Sif's parking lot program.  ***")
+    print("\t*******     How can we help you?      *******")
     print("\t**********************************************")
 
 def process_file_input():
