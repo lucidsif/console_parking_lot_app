@@ -62,7 +62,7 @@ def test_process_input(capsys):
     # Response messages
     quitResponse = "\nThanks for using the parking lot program!"
     invalidResponse = "\nI didn't understand that input.\n\n"
-    def uninitialized_lot():
+    def test_uninitialized_lot():
             def test_create_parking_lot_cmd():
                 lotContainer = [None]
                 # A create_parking_lot command passed to process_input should call the
@@ -87,7 +87,7 @@ def test_process_input(capsys):
             test_create_parking_lot_cmd()
             test_quit_cmd()
             test_invalid_cmd()
-    def initialized_lot():
+    def test_initialized_lot():
         # Test data
         car1Registration = 'XAB-741'
         car1Color = 'Black'
@@ -149,8 +149,8 @@ def test_process_input(capsys):
         test_slot_numbers_for_cars_with_color_cmd
         test_slot_number_for_registration_number_cmd()
         test_status_cmd()
-    uninitialized_lot()
-    initialized_lot()
+    test_uninitialized_lot()
+    test_initialized_lot()
 
     
 
