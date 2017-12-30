@@ -163,7 +163,7 @@ def test_process_file_input(capsys):
     uninitializedLotContainer = [None]    
     def test_file_name_passed():
         # It should call process_input on the file if there is a filename passed to it.
-        testargs = ["console_app.py", "file_inputs.txt"]
+        testargs = ["console_app.py", "./file_inputs.txt"]
         expectedPrintOutput = ('Created a parking lot with 6 slots\n' +
         'Allocated slot number:0\n' +
         'Allocated slot number:1\n' +
