@@ -1,1 +1,4 @@
-{}
+{
+  "tests/test_console_app.py::test_first": true,
+  "tests/test_console_app.py::test_myoutput": true
+}

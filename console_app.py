@@ -7,10 +7,12 @@ from create_parking_lot import create_parking_lot
 ### FUNCTIONS ### 
 
 def display_title_bar():    
-    print("\t**********************************************")
-    print("\t***  Welcome to Sif's parking lot program.  ***")
-    print("\t*******     How can we help you?      *******")
-    print("\t**********************************************")
+    line1 = "\t**********************************************\n"
+    line2 = "\t**  Welcome to Sif's parking lot program!  **\n"
+    line3 = "\t*******     How can we help you?      *******\n"
+    line4 = "\t**********************************************\n"
+    expectedPrint = line1 + line2 + line3 + line4
+    print(expectedPrint)
 
 def display_options(lotContainer):
     # See initialize_console_app() for information on lotContainer
