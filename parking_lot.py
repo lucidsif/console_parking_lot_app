@@ -46,10 +46,12 @@ def process_input(command, lot):
             print(lot.leave(ticket))
         elif command[0] == 'registration_numbers_for_cars_with_color':
             color = command[1]
-            print(lot.registration_numbers_for_cars_with_color(color))
+            registrationList = lot.registration_numbers_for_cars_with_color(color)
+            print(str(registrationList)[1:-1])
         elif command[0] == 'slot_numbers_for_cars_with_color':
             color = command[1]
-            print(lot.slot_numbers_for_cars_with_color(color))
+            slotList = lot.slot_numbers_for_cars_with_color(color)
+            print(str(slotList)[1:-1])
         elif command[0] == 'slot_number_for_registration_number':
             registration = command[1]
             print(lot.slot_number_for_registration_number(registration))
@@ -81,7 +83,6 @@ def initialize_console_app():
     user_input = ['']
     # Initialize lot state
     lot = None
-
     # If a filename as been sent as input for the program at launch, process that file
     if len(sys.argv) == 2:
         fileInput = sys.argv[1]
@@ -93,8 +94,7 @@ def initialize_console_app():
             # Only reassign the lot state if a parking lot instance is created in process_input            
             if (isinstance(output, create_parking_lot)):
                 lot = output
-        return 'EOF reached!'
-        
+        return 'EOF reached!'   
     # Set up a loop where users can choose what they'd like to do.    
     while user_input[0] != 'q':
         display_options(lot)   
