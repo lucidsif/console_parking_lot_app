@@ -48,6 +48,7 @@ def test_display_options(capsys):
         assert out == expectedPrintForInitializedLot
 
 def test_process_input(capsys):
+    # Input commands
     park = 'park'
     leave = 'leave'
     registrationNumbersForCarsWithColor = 'registration_numbers_for_cars_with_color'
@@ -57,6 +58,10 @@ def test_process_input(capsys):
     createParkingLot = 'create_parking_lot'
     quitCmd = 'q'
     invalidInput = 'thisIsInvalidInput'
+    # Response messages
+    quitResponse = "\nThanks for using the parking lot program!"
+    invalidResponse = "\nI didn't understand that input.\n\n"
+
     def uninitialized_lot():
             def test_create_parking_lot_cmd():
                 lotContainer = [None]
@@ -76,12 +81,19 @@ def test_process_input(capsys):
             def test_invalid_cmd():
                 lotContainer = [None]                
                 # It should print an apology message for the invalid input
-                process_input([quitCmd], lotContainer)
+                process_input([invalidInput], lotContainer)
                 out, err = capsys.readouterr()
-                assert out == "\nThanks for using my parking lot program!\n"
+                assert out == invalidResponse
+            test_create_parking_lot_cmd()
+            test_quit_cmd()
+            test_invalid_cmd()
+
     def initialized_lot():
         lotContainer = [create_parking_lot(10)]
-        pass
+        def test_park_cmd():
+            pass
+    uninitialized_lot()
+
     
 
 
