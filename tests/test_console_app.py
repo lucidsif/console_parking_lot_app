@@ -58,22 +58,32 @@ def test_process_input(capsys):
     quitCmd = 'q'
     invalidInput = 'thisIsInvalidInput'
     def uninitialized_lot():
-        lotContainer = [None]
-        # A create_parking_lot command passed to process_input should call the
-        # create_parking_lot() method 
-        process_input([createParkingLot, 10], lotContainer)
-        out, err = capsys.readouterr()    
-        assert out == 'Created a parking lot with 10 slots\n'
-        # It should mutate the lotContainer by replacing the None with a create_parking_lot instance
-        assert isinstance(lotContainer[0], create_parking_lot)
-        # Reset lotContainer for next test case
-        lotContainer = [None]
-        # It should print a thank you message when the quit command is given
-        process_input([quitCmd], lotContainer)
-        out, err = capsys.readouterr()
-        assert out == "\nThanks for using my parking lot program!\n"
+            def test_create_parking_lot_cmd():
+                lotContainer = [None]
+                # A create_parking_lot command passed to process_input should call the
+                # create_parking_lot() method 
+                process_input([createParkingLot, 10], lotContainer)
+                out, err = capsys.readouterr()    
+                assert out == 'Created a parking lot with 10 slots\n'
+                # It should mutate the lotContainer by replacing the None with a create_parking_lot instance
+                assert isinstance(lotContainer[0], create_parking_lot)
+            def test_quit_cmd():
+                lotContainer = [None]                
+                # It should print a thank you message when the quit command is given
+                process_input([quitCmd], lotContainer)
+                out, err = capsys.readouterr()
+                assert out == "\nThanks for using my parking lot program!\n"
+            def test_invalid_cmd():
+                lotContainer = [None]                
+                # It should print an apology message for the invalid input
+                process_input([quitCmd], lotContainer)
+                out, err = capsys.readouterr()
+                assert out == "\nThanks for using my parking lot program!\n"
     def initialized_lot():
+        lotContainer = [create_parking_lot(10)]
         pass
+    
+
 
 
 
