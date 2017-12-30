@@ -11,7 +11,7 @@ def display_title_bar():
     print("\t***  Welcome to Sif's parking lot program. How can we help you?  ***")
     print("\t**********************************************")
 
-def processFileInput():
+def process_file_input():
     pass
 
 def display_options(lot):
@@ -30,16 +30,55 @@ def display_options(lot):
         print('[create_parking_lot] <int slots>')
         print('[q] <string quit>')
 
-def parse_user_input():
-    # Split string into a list delimited by white spaces
-    return input("What would you like to do? ").split()
+def process_input(command, lot):
+    # Respond to the input based on whether they created a lot or not and the exact method being called.
+    if isinstance(lot, create_parking_lot):
+        if command[0] == 'park':
+            registration = command[1]
+            color = command[2]
+            ticket = lot.park(registration, color)
+            if type(ticket) is int:
+                print('Allocated slot number:%s' %(ticket))
+            else:
+                print(ticket)
+        elif command[0] == 'leave':
+            ticket = int(command[1])
+            print(lot.leave(ticket))
+        elif command[0] == 'registration_numbers_for_cars_with_color':
+            color = command[1]
+            print(lot.registration_numbers_for_cars_with_color(color))
+        elif command[0] == 'slot_numbers_for_cars_with_color':
+            color = command[1]
+            print(lot.slot_numbers_for_cars_with_color(color))
+        elif command[0] == 'slot_number_for_registration_number':
+            registration = command[1]
+            print(lot.slot_number_for_registration_number(registration))
+        elif(command[0] == 'status'):
+            statusList = lot.status()
+            for vehicle in statusList:
+                print('%s %s %s' %(vehicle['slot'], vehicle['registration'], vehicle['color']))
+        elif command[0] == 'q':
+            print("\nThanks for using the parking lot program!")
+        else:
+            print(command)
+            print("\nI didn't understand that input.\n")
+    else:
+        if command[0] == 'create_parking_lot':
+            numOfSlots = int(command[1])
+            lot = create_parking_lot(numOfSlots)
+            return lot
+        elif command[0] == 'q':
+            print("\nThanks for using my parking lot program!")
+        else:
+            print(command)
+            print("\nI didn't understand that input.\n")
 
 def initialize_console_app():
     # Clears the terminal screen, and displays a title bar. 
     os.system('clear') 
     display_title_bar() 
     # Initialize choice to be an array with a single empty string for command line arguments parsing.
-    choice = ['']
+    user_input = ['']
     # Initialize lot state
     lot = None
 
@@ -52,51 +91,16 @@ def initialize_console_app():
         print(lineInputs[0])
         # Clean each command and pass to the program
         
-
     # Set up a loop where users can choose what they'd like to do.    
-    while choice[0] != 'q':
+    while user_input[0] != 'q':
         display_options(lot)   
-        choice = parse_user_input()
-        # Respond to the user's input based on whether they created a lot or not.
-        if isinstance(lot, create_parking_lot):
-            if choice[0] == 'park':
-                registration = choice[1]
-                color = choice[2]
-                ticket = lot.park(registration, color)
-                if type(ticket) is int:
-                    print('Allocated slot number:%s' %(ticket))
-                else:
-                    print(ticket)
-            elif choice[0] == 'leave':
-                ticket = int(choice[1])
-                print(lot.leave(ticket))
-            elif choice[0] == 'registration_numbers_for_cars_with_color':
-                color = choice[1]
-                print(lot.registration_numbers_for_cars_with_color(color))
-            elif choice[0] == 'slot_numbers_for_cars_with_color':
-                color = choice[1]
-                print(lot.slot_numbers_for_cars_with_color(color))
-            elif choice[0] == 'slot_number_for_registration_number':
-                registration = choice[1]
-                print(lot.slot_number_for_registration_number(registration))
-            elif(choice[0] == 'status'):
-                statusList = lot.status()
-                for vehicle in statusList:
-                    print('%s %s %s' %(vehicle['slot'], vehicle['registration'], vehicle['color']))
-            elif choice[0] == 'q':
-                print("\nThanks for using the parking lot program!")
-            else:
-                print(choice)
-                print("\nI didn't understand that input.\n")
-        else:
-            if choice[0] == 'create_parking_lot':
-                numOfSlots = int(choice[1])
-                lot = create_parking_lot(numOfSlots)
-            elif choice[0] == 'q':
-                print("\nThanks for using my parking lot program!")
-            else:
-                print(choice)
-                print("\nI didn't understand that input.\n")
+        user_input = input("What would you like to do? ").split()
+        output = process_input(user_input, lot)
+        # Only reassign the lot state if a parking lot instance is created in process_input
+        if (isinstance(output, create_parking_lot)):
+            lot = output
+
+
 
 initialize_console_app()
 
