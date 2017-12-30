@@ -36,6 +36,9 @@ def test_park():
     lot.park('PQR', 'Violet')
     lot.park('STU', 'Rainbow')
     assert lot.park('thisShouldNotBeParked', 'fail') == 'Sorry, parking lot is full'
+    # Trying to park a car with a registration that already exists in the lot should return an apology message
+    output = lot.park('JKL', 'Green')
+    assert output == 'Sorry, that registration already exists in our lot.'
 
 def test_find_closest_spot():
     lot = create_parking_lot(5)

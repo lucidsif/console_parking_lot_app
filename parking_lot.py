@@ -83,7 +83,7 @@ def initialize_console_app():
     user_input = ['']
     # Initialize lot state
     lot = None
-    # If a filename as been sent as input for the program at launch, process that file
+    # If a filename as been sent as input for the program at launch, process that file.
     if len(sys.argv) == 2:
         fileInput = sys.argv[1]
         lineInputs = []
@@ -91,16 +91,16 @@ def initialize_console_app():
             lineInputs = i.readlines()
         for command in lineInputs:
             output = process_input(command.split(), lot)
-            # Only reassign the lot state if a parking lot instance is created in process_input            
+            # Only reassign the lot state if a parking lot instance is created in process_input.            
             if (isinstance(output, create_parking_lot)):
                 lot = output
-        return 'EOF reached!'   
+           
     # Set up a loop where users can choose what they'd like to do.    
     while user_input[0] != 'q':
         display_options(lot)   
         user_input = input("What would you like to do? ").split()
         output = process_input(user_input, lot)
-        # Only reassign the lot state if a parking lot instance is created in process_input
+        # Only reassign the lot state if a parking lot instance is created in process_input.
         if (isinstance(output, create_parking_lot)):
             lot = output
 
