@@ -158,32 +158,42 @@ def test_process_input(capsys):
     test_initialized_lot()
 
 def test_process_file_input(capsys):
-    # It should call process_input if there is a filename passed to it.
-    uninitializedLotContainer = [None]
-    testargs = ["console_app.py", "file_inputs.txt"]
-    expectedPrintOutput = ('Created a parking lot with 6 slots\n' +
-    'Allocated slot number:0\n' +
-    'Allocated slot number:1\n' +
-    'Allocated slot number:2\n' +
-    'Allocated slot number:3\n' +
-    'Allocated slot number:4\n' +
-    'Allocated slot number:5\n' +
-    'Slot number 4 is free\n' +
-    '0 KA-01-HH-1234 White\n' +
-    '1 KA-01-HH-9999 White\n' +
-    '2 KA-01-BB-0001 Black\n' +
-    '3 KA-01-HH-7777 Red\n' +
-    '5 KA-01-HH-3141 Black\n' +
-    'Allocated slot number:4\n' +
-    'Sorry, parking lot is full\n' +
-    "'KA-01-HH-1234', 'KA-01-HH-9999', 'KA-01-P-333'\n" +
-    '0, 1, 4\n' +
-    '5\n' +
-    'Not found\n')
-    with patch.object(sys, 'argv', testargs):
-        process_file_input(uninitializedLotContainer)
-        out, err = capsys.readouterr()
-        assert out == expectedPrintOutput
+    uninitializedLotContainer = [None]    
+    def test_file_name_passed():
+        # It should call process_input on the file if there is a filename passed to it.
+        testargs = ["console_app.py", "file_inputs.txt"]
+        expectedPrintOutput = ('Created a parking lot with 6 slots\n' +
+        'Allocated slot number:0\n' +
+        'Allocated slot number:1\n' +
+        'Allocated slot number:2\n' +
+        'Allocated slot number:3\n' +
+        'Allocated slot number:4\n' +
+        'Allocated slot number:5\n' +
+        'Slot number 4 is free\n' +
+        '0 KA-01-HH-1234 White\n' +
+        '1 KA-01-HH-9999 White\n' +
+        '2 KA-01-BB-0001 Black\n' +
+        '3 KA-01-HH-7777 Red\n' +
+        '5 KA-01-HH-3141 Black\n' +
+        'Allocated slot number:4\n' +
+        'Sorry, parking lot is full\n' +
+        "'KA-01-HH-1234', 'KA-01-HH-9999', 'KA-01-P-333'\n" +
+        '0, 1, 4\n' +
+        '5\n' +
+        'Not found\n')
+        with patch.object(sys, 'argv', testargs):
+            process_file_input(uninitializedLotContainer)
+            out, err = capsys.readouterr()
+            assert out == expectedPrintOutput
+    def test_no_file_name_passed():
+        testargs = ["console_app.py"]
+        expectedPrintOutput = ''
+        with patch.object(sys, 'argv', testargs):
+            process_file_input(uninitializedLotContainer)
+            out, err = capsys.readouterr()
+            assert out == expectedPrintOutput
+    test_file_name_passed()
+    test_no_file_name_passed()
 
     
 
