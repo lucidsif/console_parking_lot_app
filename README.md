@@ -18,11 +18,11 @@ mock
 ### Installing
 
 ```
-git clone
+git clone https://github.com/lucidsif/console_parking_lot_app.git
 ```
 
 ```
-pip install
+pip install -r requirements.txt
 ```
 
 ## Running the tests

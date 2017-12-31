@@ -18,11 +18,11 @@ mock
 ### Installing
 
 ```
-git clone
+git clone https://github.com/lucidsif/console_parking_lot_app.git
 ```
 
 ```
-pip install
+pip install -r requirements.txt
 ```
 
 ## Running the tests
@@ -33,7 +33,7 @@ pip install
 
 ### Unit & Functional tests
 
-The tests cover the create_parking_lot() class and console_app functions.
+The tests cover the create_parking_lot() class and console_app functions. Alternatively, you can also do the following:
 
 ```
 pytest
