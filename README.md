@@ -17,9 +17,7 @@ mock
 
 ### Installing
 
-```
-git clone https://github.com/lucidsif/console_parking_lot_app.git
-```
+Please clone the private repo or download the zip. Feel free to request invitation as a collab.
 
 ```
 pip install -r requirements.txt
@@ -53,7 +51,8 @@ pytest
 
 ## Authors
 
-* **Tawsif Ahmed** - *Initial work* - [Corridor](https://github.com/corridor)
+* **Tawsif (Sif) Ahmed** - *Initial work* - [Corridor](https://github.com/corridor)
+If you run into any problems, have any questions, concerns, or comments, feel free to email me directly at ahmedt93@gmail.com
 
 ## License
 
