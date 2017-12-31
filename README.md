@@ -11,7 +11,8 @@ What things you need to install the software and how to install them
 
 ```
 python3
-pip3
+pip
+mock
 ```
 
 ### Installing
@@ -24,28 +25,31 @@ git clone
 pip install
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
 ```
-Give an example
+./Makefile
 ```
 
-### And coding style tests
+### Unit & Functional tests
 
-Explain what these tests test and why
+The tests cover the create_parking_lot() class and console_app functions. Alternatively, you can also do the following:
 
 ```
-Give an example
+pytest
 ```
 
+## Running the interactive terminal program
+
+```
+./parking_lot
+```
+
+## Feeding a file to the terminal program
+
+```
+./parking_lot file_inputs.txt
+```
 
 ## Authors
 
