@@ -1,6 +1,6 @@
 # Terminal Parking Lot App
 
-A parking lot program in your terminal that can accept file input and user input. This was a project I was expected to complete for a take home project. I liked what I accomplished given the time expected and my noobness in Python prior to the start of the project.
+A parking lot program in your terminal that can accept file input and user input. This was a project I was expected to complete for a take home project. I liked what I accomplished given the time expected and my noobness in Python so I decided to add this project to my portfolio.
 
 ## Getting Started
 
