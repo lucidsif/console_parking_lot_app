@@ -51,13 +51,10 @@ pytest
 
 ## Authors
 
-* **Tawsif (Sif) Ahmed** - *Initial work* - [Corridor](https://github.com/corridor)
+* **Tawsif (Sif) Ahmed** - *Initial work* 
 If you run into any problems, have any questions, concerns, or comments, feel free to email me directly at ahmedt93@gmail.com
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
-
-* Smit
