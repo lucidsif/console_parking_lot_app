@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 # If program stops running after input, change the path above for your system
 
 from console_app import initialize_console_app
